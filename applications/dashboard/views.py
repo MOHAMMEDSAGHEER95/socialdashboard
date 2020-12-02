@@ -45,7 +45,7 @@ class SocialUserLoginAPI(APIView):
         url = 'https://graph.facebook.com/{}/accounts?fields=name,access_token&access_token={}'.format(data['id'], token)
         response = requests.get(url)
         result = response.json()
-        if response.status_code == 200:
+        if response.status_code == 200 and len(result['data']):
             social_token = {'name': 'facebook', 'page_id': result['data'][0]['id'],
                             'page_access_token': result['data'][0]['access_token'],
                             'user': user}
