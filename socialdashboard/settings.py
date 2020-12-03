@@ -63,7 +63,8 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "https://localhost:3000",
     "http://sagheersayone.pythonanywhere.com",
-    "https://sagheersayone.pythonanywhere.com"
+    "https://sagheersayone.pythonanywhere.com",
+    "https://still-caverns-50881.herokuapp.com"
 ]
 
 ROOT_URLCONF = 'socialdashboard.urls'
