@@ -4,3 +4,4 @@ djangorestframework==3.12.2
 facebook-sdk==3.1.0
 requests==2.25.0
 python-dotenv==0.15.0
+django-cors-headers==3.5.0
