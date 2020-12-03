@@ -8,7 +8,7 @@ class FaceBookHelperClient(object):
 
     def __init__(self, user):
         facebook = user.social_media_handle.first()
-        self.ACCESS_TOKEN = facebook.page_access_token
+        self.ACCESS_TOKEN = facebook.user_access_token
         self.PAGE_ID = facebook.page_id
 
     def make_api_request(self, url, method="GET"):
