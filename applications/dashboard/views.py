@@ -65,8 +65,8 @@ class SocialMediaPageInfo(APIView):
             facebook_client = FaceBookHelperClient(request.user)
             result = facebook_client.get_page_info()
             if result.status_code == 200:
-                return Response({'message': result.json()})
-        return Response({'message': "No page associated with this user"})
+                return Response({'message': [result.json()]}, status=200)
+        return Response({'message': "No page associated with this user"}, status=status.HTTP_403_FORBIDDEN)
 
 
 class UpdateSocialMediaPageInfo(APIView):
@@ -74,7 +74,7 @@ class UpdateSocialMediaPageInfo(APIView):
 
     def post(self, request):
         serializer = UpdatePageInfoSerializer(data=request.data)
-        if serializer.is_valid():
+        if serializer.is_valid() and request.user.social_media_handle.exists():
             facebook_client = FaceBookHelperClient(request.user)
             response = facebook_client.update_page_info(serializer.validated_data)
             if response.status_code == 200:

@@ -12,6 +12,6 @@ class SocialSerializer(serializers.Serializer):
 
 class UpdatePageInfoSerializer(serializers.Serializer):
     about = serializers.CharField(required=False)
-    emails = serializers.ListField(child=serializers.EmailField())
+    emails = serializers.ListField(child=serializers.EmailField())  # emails should be sent as array to facebook
     website = serializers.URLField(required=False)
     phone = serializers.IntegerField(required=False)
