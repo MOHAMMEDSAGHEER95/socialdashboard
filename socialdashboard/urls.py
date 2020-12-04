@@ -22,7 +22,7 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('applications.dashboard.urls')),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
+    url('rest-auth/', include('rest_auth.urls')),
 ]
 
 urlpatterns += [url(r'^media/(?P<path>.*)$', serve,
