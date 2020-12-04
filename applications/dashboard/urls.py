@@ -4,5 +4,6 @@ from applications.dashboard import views
 
 urlpatterns = [
     path('facebook/', views.SocialUserLoginAPI.as_view(), name='api-social-auth-register'),
-    path('social-handles/', views.SocialMediaPage.as_view(), name='social-handles'),
+    path('social-handles/', views.SocialMediaPageInfo.as_view(), name='social-handles'),
+    path('update-social-handles/', views.UpdateSocialMediaPageInfo.as_view(), name='update-social-handles'),
 ]

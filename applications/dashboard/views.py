@@ -13,7 +13,7 @@ from rest_framework.views import APIView
 from api.client import FaceBookHelperClient
 from api.helpers import get_long_lived_user_token
 from applications.dashboard.models import SocialMediaAccessToken
-from applications.dashboard.serializers import SocialSerializer
+from applications.dashboard.serializers import SocialSerializer, UpdatePageInfoSerializer
 
 
 class SocialUserLoginAPI(APIView):
@@ -57,13 +57,28 @@ class SocialUserLoginAPI(APIView):
             print(e)
 
 
-class SocialMediaPage(APIView):
+class SocialMediaPageInfo(APIView):
     permission_classes = (IsAuthenticated,)
 
     def get(self, request):
         if request.user.social_media_handle.exists():
-            facebook_helper = FaceBookHelperClient(request.user)
-            result = facebook_helper.get_page_info()
+            facebook_client = FaceBookHelperClient(request.user)
+            result = facebook_client.get_page_info()
             if result.status_code == 200:
                 return Response({'message': result.json()})
         return Response({'message': "No page associated with this user"})
+
+
+class UpdateSocialMediaPageInfo(APIView):
+    permission_classes = (IsAuthenticated,)
+
+    def post(self, request):
+        serializer = UpdatePageInfoSerializer(data=request.data)
+        if serializer.is_valid():
+            facebook_client = FaceBookHelperClient(request.user)
+            response = facebook_client.update_page_info(serializer.validated_data)
+            if response.status_code == 200:
+                return Response({'message': response.json()})
+            else:
+                return Response({'message': response.json()['error']}, status=response.status_code)
+        return Response({'message': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
