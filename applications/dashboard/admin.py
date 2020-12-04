@@ -8,4 +8,4 @@ class SocialMediaAccessTokenAdmin(admin.ModelAdmin):
     list_display = ('name', 'created', 'modified')
 
 
-admin.site.register(SocialMediaAccessToken)
+admin.site.register(SocialMediaAccessToken, SocialMediaAccessTokenAdmin)
