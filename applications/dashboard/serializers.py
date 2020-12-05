@@ -1,7 +1,5 @@
 from rest_framework import serializers
 
-from applications.dashboard.models import SocialMediaAccessToken
-
 
 class SocialSerializer(serializers.Serializer):
     """
