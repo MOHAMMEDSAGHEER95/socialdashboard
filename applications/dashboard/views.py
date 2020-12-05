@@ -82,5 +82,5 @@ class UpdateSocialMediaPageInfo(APIView):
             if response.status_code == 200:
                 return Response({'message': response.json()})
             else:
-                return Response({'message': response.json()['error']}, status=response.status_code)
-        return Response({'message': serializer.errors}, status=status.HTTP_400_BAD_REQUEST)
+                return Response(response.json()['error'], status=response.status_code)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
