@@ -11,13 +11,7 @@ class SocialSerializer(serializers.Serializer):
 
 
 class UpdatePageInfoSerializer(serializers.Serializer):
-    about = serializers.CharField(required=False, allow_blank=True)
-    emails = serializers.EmailField(required=False)
-    website = serializers.URLField(required=False, allow_blank=True)
-    phone = serializers.IntegerField(required=False)
-
-    def to_internal_value(self, data):
-        formatted_data = {k: v for k, v in data.items() if v}
-        if 'emails' in formatted_data:
-            formatted_data['emails'] = [formatted_data['emails']]  # emails should be sent as array to facebook
-        return formatted_data
+    about = serializers.CharField(required=False, allow_null=True, allow_blank=True)
+    emails = serializers.ListField(child=serializers.EmailField(allow_null=True, allow_blank=True), required=False)
+    website = serializers.URLField(required=False, allow_null=True, allow_blank=True)
+    phone = serializers.IntegerField(required=False, allow_null=True)

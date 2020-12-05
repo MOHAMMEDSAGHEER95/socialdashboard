@@ -73,7 +73,9 @@ class UpdateSocialMediaPageInfo(APIView):
     permission_classes = (IsAuthenticated,)
 
     def post(self, request):
-        serializer = UpdatePageInfoSerializer(data=request.data)
+        cleaned_data = {field: value for field, value in request.data.items() if value}
+        serializer = UpdatePageInfoSerializer(data=cleaned_data)
+
         if serializer.is_valid() and request.user.social_media_handle.exists():
             facebook_client = FaceBookHelperClient(request.user)
             response = facebook_client.update_page_info(serializer.validated_data)
