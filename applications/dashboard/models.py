@@ -25,8 +25,6 @@ class SocialMediaAccessToken(Tracker):
     page_id = models.CharField(max_length=250, null=True, blank=True)
     user_access_token = models.TextField(max_length=250, help_text=("facebook user access token(no expiry)"),
                                          null=True, blank=True)
-    page_access_token = models.TextField(max_length=250, help_text=("facebook page access token(no expiry)"),
-                                         null=True, blank=True)
 
     class Meta:
         verbose_name = _('Social Media Token')

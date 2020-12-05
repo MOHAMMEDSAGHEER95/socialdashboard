@@ -2,6 +2,8 @@ import urllib
 
 import requests
 
+from api.helpers import get_long_lived_page_token
+
 
 class FaceBookHelperClient(object):
     BASE_URL = 'https://graph.facebook.com/v8.0'
@@ -10,7 +12,7 @@ class FaceBookHelperClient(object):
         facebook = user.social_media_handle.first()
         self.ACCESS_TOKEN = facebook.user_access_token
         self.PAGE_ID = facebook.page_id
-        self.PAGE_ACCESS_TOKEN = facebook.page_access_token
+        self.PAGE_ACCESS_TOKEN = get_long_lived_page_token(self.PAGE_ID, self.ACCESS_TOKEN)
 
     def make_api_request(self, url, method="GET"):
         if method == "GET":

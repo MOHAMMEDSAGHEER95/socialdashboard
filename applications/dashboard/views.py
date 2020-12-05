@@ -51,7 +51,7 @@ class SocialUserLoginAPI(APIView):
             if response.status_code == 200 and len(result['data']):
                 social_token = {'name': 'facebook', 'page_id': result['data'][0]['id'],
                                 'user_access_token': user_token,
-                                'user': user, 'page_access_token': result['data'][0]['access_token']}
+                                'user': user}
                 SocialMediaAccessToken.objects.create(**social_token)
         except KeyError as e:
             print(e)
